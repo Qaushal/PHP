@@ -14,31 +14,51 @@
 </head>
 
 <body>
+    <?php include './partials/_dbconnect.php' ;?>
     <?php include './partials/_header.php' ;?>
+
+
+    <!-- search result -->
     <div class="container my-3">
-        <form>
-            <h1 class="text-center">Contact Us</h1>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Rate our website</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Very Good</option>
-                    <option>Good</option>
-                    <option>Satisfied</option>
-                    <option>poor</option>
-                    <option>Very poor</option>
-                </select>
-            </div>
-           
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Suggestion</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="We would like , if you tell us more about your opinion"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <h1>Search Result for "<?php echo $_GET['search'];?>"</h1>
+        <?php
+        $noResult=true;
+        $query = $_GET["search"];
+        $sql = "SELECT * FROM `thread` WHERE MATCH (Thread_Title,Thread_Desc) against  ('$query') ";
+        $result = mysqli_query($online,$sql);
+        while($row=mysqli_fetch_assoc($result)){
+         $noResult=false;
+       
+        $title = $row['Thread_Title'];
+        $desc = $row['Thread_Desc'];
+        $Thread_id=$row['Thread_id'];
+        $url = "Thread.php?Threadid=$Thread_id";
+
+
+       echo ' <div class="result">  <h3><a href="'.$url.'" class="text-dark">'.$title.'</a></h3> 
+       <p>'.$desc.'</p>
+       </div>';
+       
+     }
+     if($noResult){
+        echo '<div class="jumbotron jumbotron-fluid" bis_skin_checked="1">
+  <div class="container" bis_skin_checked="1">
+    <h1 class="display-4">No Result Found</h1>
+    <p class="lead">Suggestions:<ul>
+
+            <li>Make sure that all words are spelled correctly.</li>
+            <li>Try different keywords.</li>
+            <li>Try more general keywords..</li>
+            </ul>
+            </p>
+  </div>
+</div>';
+     }
+    ?>
+
+
+
+
     </div>
 
     <?php include './partials/_footer.php' ;?>

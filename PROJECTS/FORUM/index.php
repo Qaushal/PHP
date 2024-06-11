@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Forum</title>
+    <title>Tech Forum</title>
 </head>
 
 <body>
-    <?php include './partials/_header.php' ;?>
     <?php include './partials/_dbconnect.php' ;?>
+    <?php include './partials/_header.php' ;?>
 
     <!-- sliders -->
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -23,16 +23,28 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://source.unsplash.com/random/2400x700?coding" class="d-block w-100" alt="...">
+                <img src="./img/code-coffee.jfif" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="https://source.unsplash.com/random/2400x700?natures" class="d-block w-100" alt="...">
+                <img src="./img/code-laptop.jfif" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="https://source.unsplash.com/random/2400x700?animals" class="d-block w-100" alt="...">
+                <img src="./img/coder-with-laptopsss.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./img/html.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./img/javascript.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./img/javascript-2.jfif" class="d-block w-100" alt="...">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -52,7 +64,7 @@
             <!-- fetch catergories from database -->
             <?php 
           $sql = "SELECT * FROM `forum`";
-          $result = mysqli_query($conn,$sql);
+          $result = mysqli_query($online,$sql);
           while($row=mysqli_fetch_assoc($result)){
             
             $id= $row['Category_id'];
@@ -60,7 +72,7 @@
             $categdes = $row['Category_description'];
             echo '<div class="col md-4 my-2">
             <div class="card" style="width: 18rem;">
-                <img src="https://source.unsplash.com/random/200x100?'.$categ.',coding" class="card-img-top" alt="...">
+                <img src="https://picsum.photos/1000/600?'.$categ.',coding" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"><a href="Threadlist.php?$catid='.$id.'">'.$categ.'</a></h5>
                     <p class="card-text">'.substr($categdes,0,40).' ...</p>

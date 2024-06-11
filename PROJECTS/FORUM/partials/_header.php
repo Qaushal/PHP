@@ -1,11 +1,9 @@
 <?php
 session_start();
-
-
-
+include './partials/_dbconnect.php' ;
 
 echo ' <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-<a class="navbar-brand" href="index.php">Forum</a>
+<a class="navbar-brand" href="index.php">Tech.Forum</a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -15,34 +13,33 @@ echo ' <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
     <li class="nav-item active">
       <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="about.php">About</a>
-    </li>
+   
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Categories
+        Top Categories
       </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+        $sql = "SELECT `Category_name`,`Category_id` FROM `forum` LIMIT 3";
+        $result=mysqli_query($online,$sql);
+        while($row=mysqli_fetch_assoc($result)){
+       echo' <a class="dropdown-item" href="Threadlist.php?$catid='.$row['Category_id'].'">'.$row['Category_name'].'</a>';
+        
+        }
+     echo' </div>
     </li>
-    <li class="nav-item">
-      <a class="nav-link " href="Contact.php" tabindex="-1" >Contact</a>
-    </li>
+
   </ul>
   <div class="row mx-2">';
   if(isset($_SESSION['Loggedin']) && $_SESSION['Loggedin']==true){
- echo '<form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+ echo '<form class="form-inline my-2 my-lg-0" method="get" action="search.php"> 
+    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search for Queries" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    <p class = "text-light my-0 mx-2">WELCOME '. strstr($_SESSION['useremail'], '@', true)  .'</p></form>
-  <button class="btn btn-success ml-2" data-toggle="modal" data-target="#logoutModel">Logout</button>';
+    <p class = "text-light my-0 mx-2">WELCOME '.strstr($_SESSION['useremail'],"@",true)  .'</p></form>
+  <a href="partials/_logout.php" class="btn btn-warning ml-2" >Logout</a>';
   }
   else{
- echo' <form class="form-inline my-2 my-lg-0">
+ echo' 
+  <form class="form-inline my-2 my-lg-0">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
@@ -67,3 +64,5 @@ if(isset($_GET['signupsuccess']) && $_GET['signupsuccess']=='true'){
 }
 
 ?>
+
+<!-- //strstr($_SESSION['useremail'], '@', true)  -->

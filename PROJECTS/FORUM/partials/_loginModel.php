@@ -15,11 +15,11 @@
             <form action="partials/_handleLogin.php" method="post">
             <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
+                        <label for="exampleInputEmail1">Email Address</label>
                         <input type="email" class="form-control" id="loginemail" name="loginemail" aria-describedby="emailHelp"
-                            placeholder="Enter email">
+                            placeholder="Enter Your Username">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small>
+                            else.</small> 
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
