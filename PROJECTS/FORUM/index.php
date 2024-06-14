@@ -64,7 +64,7 @@
             <!-- fetch catergories from database -->
             <?php 
           $sql = "SELECT * FROM `forum`";
-          $result = mysqli_query($online,$sql);
+          $result = mysqli_query($conn,$sql);
           while($row=mysqli_fetch_assoc($result)){
             
             $id= $row['Category_id'];

@@ -21,7 +21,7 @@
     <?php
      $id=$_GET['Threadid'];
      $sql = "SELECT * FROM `thread` WHERE Thread_id=$id;";
-     $result = mysqli_query($online,$sql);
+     $result = mysqli_query($conn,$sql);
      while($row=mysqli_fetch_assoc($result)){
        
         $title = $row['Thread_Title'];
@@ -29,7 +29,7 @@
         $commented = $row['Thread_user_id'];
        
         $sql2= "SELECT User_email FROM `user` WHERE Srno='$commented'";
-        $result2 = mysqli_query($online,$sql2);
+        $result2 = mysqli_query($conn,$sql2);
         $row2 = mysqli_fetch_assoc($result2);
         $postedby =$row2['User_email'];
        
@@ -47,7 +47,7 @@
         $Srno = $_POST['Srno']; 
         
         $sql="INSERT INTO `discussion` (`Discussion_id`, `Discussion_content`, `Thread_id`, `Discussion_by`, `Discussion_time`) VALUES ('', '$comment', '$id', '$Srno', current_timestamp())"; 
-    $result = mysqli_query($online,$sql);
+    $result = mysqli_query($conn,$sql);
     $showAlert = true;
     if($showAlert){
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -111,7 +111,7 @@
         $noResult=true;
      $id=$_GET['Threadid'];
      $sql = "SELECT * FROM `discussion` WHERE Thread_id=$id;";
-     $result = mysqli_query($online,$sql);
+     $result = mysqli_query($conn,$sql);
      while($row=mysqli_fetch_assoc($result)){
          $noResult=false;
       $id = $row['Discussion_id'];
@@ -121,7 +121,7 @@
       $time = date('g:i a', $timestamp);
       $Thread_user_id = $row['Discussion_by']; 
       $sql2= "SELECT User_email FROM `user` WHERE Srno='$Thread_user_id'";
-      $result2 = mysqli_query($online,$sql2);
+      $result2 = mysqli_query($conn,$sql2);
       $row2 = mysqli_fetch_assoc($result2);
      
         echo  '<div class="media my-4">

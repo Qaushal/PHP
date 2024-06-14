@@ -21,7 +21,7 @@
     <?php
      $id=$_GET['$catid'];
      $sql = "SELECT * FROM `forum` WHERE Category_id=$id;";
-     $result = mysqli_query($online,$sql);
+     $result = mysqli_query($conn,$sql);
      while($row=mysqli_fetch_assoc($result)){
          
          $categ = $row['Category_name'];
@@ -43,7 +43,7 @@
       
         $Srno = $_POST['Srno']; 
         $sql=" INSERT INTO `thread` (`Thread_id`, `Thread_Title`, `Thread_Desc`, `Thread_cat_id`, `Thread_user_id`, `Timestamp`) VALUES ('', '$th_title', '$th_desc', '$id', '$Srno', current_timestamp())"; 
-    $result = mysqli_query($online,$sql);
+    $result = mysqli_query($conn,$sql);
     $showAlert = true;
     if($showAlert){
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -111,7 +111,7 @@
         <?php
      $id=$_GET['$catid'];
      $sql = "SELECT * FROM `thread` WHERE Thread_cat_id=$id;";
-     $result = mysqli_query($online,$sql);
+     $result = mysqli_query($conn,$sql);
      $noResult=true;
      while($row=mysqli_fetch_assoc($result)){
          $noResult=false;
@@ -120,7 +120,7 @@
       $desc = $row['Thread_Desc'];
       $Thread_user_id = $row['Thread_user_id'];
       $sql2= "SELECT User_email FROM `user` WHERE Srno='$Thread_user_id'";
-      $result2 = mysqli_query($online,$sql2);
+      $result2 = mysqli_query($conn,$sql2);
       $row2 = mysqli_fetch_assoc($result2);
       
       

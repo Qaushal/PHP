@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_cpassword = $_POST['signupcpassword'];
 
     $existsuser = "SELECT * FROM `user` WHERE User_email = '$user_email'";
-    $result = mysqli_query($online, $existsuser);
+    $result = mysqli_query($conn, $existsuser);
     $numrow = mysqli_num_rows($result);
     if ($numrow > 0) {
         $showError = "Email is already Exists";
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user_password == $user_cpassword) {
             $hash = password_hash($user_password, PASSWORD_DEFAULT);
             $sql = "INSERT INTO `user` (`Srno`, `User_email`, `User_Password`, `TimeStamp`) VALUES ('', '$user_email', '$hash', current_timestamp())";
-            $result = mysqli_query($online, $sql);
+            $result = mysqli_query($conn, $sql);
             if ($result) {
                 $showAlert = true;
                 header("location: /Kaushal/FORUM/index.php?signupsuccess=true");

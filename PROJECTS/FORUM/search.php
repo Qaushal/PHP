@@ -25,7 +25,7 @@
         $noResult=true;
         $query = $_GET["search"];
         $sql = "SELECT * FROM `thread` WHERE MATCH (Thread_Title,Thread_Desc) against  ('$query') ";
-        $result = mysqli_query($online,$sql);
+        $result = mysqli_query($conn,$sql);
         while($row=mysqli_fetch_assoc($result)){
          $noResult=false;
        

@@ -6,7 +6,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $user_email=$_POST['loginemail'];
     $user_password=$_POST['password'];
     $existsuser = "SELECT * FROM `user` WHERE User_email = '$user_email'";
-    $result = mysqli_query($online,$existsuser);
+    $result = mysqli_query($conn,$existsuser);
     $numrow = mysqli_num_rows($result);
     if($numrow>0){  
         $row = mysqli_fetch_assoc($result);

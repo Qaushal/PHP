@@ -20,7 +20,7 @@ echo ' <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
         $sql = "SELECT `Category_name`,`Category_id` FROM `forum` LIMIT 3";
-        $result=mysqli_query($online,$sql);
+        $result=mysqli_query($conn,$sql);
         while($row=mysqli_fetch_assoc($result)){
        echo' <a class="dropdown-item" href="Threadlist.php?$catid='.$row['Category_id'].'">'.$row['Category_name'].'</a>';
         
